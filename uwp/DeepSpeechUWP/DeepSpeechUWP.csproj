@@ -165,7 +165,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <Reference Include="DeepSpeechClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\DeepSpeech.0.7.0\lib\net46\DeepSpeechClient.dll</HintPath>
+      <HintPath>..\packages\DeepSpeech.0.7.4\lib\net46\DeepSpeechClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

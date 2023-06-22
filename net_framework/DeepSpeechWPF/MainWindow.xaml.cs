@@ -13,5 +13,10 @@ namespace DeepSpeechWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e) =>
             DataContext = ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -349,7 +349,7 @@ namespace DeepSpeech.WPF.ViewModels
             {
                 IsRunningInference = true;
                 Transcription = string.Empty;
-                StatusMessage = "Running inference...";
+                StatusMessage = "Transcribing... This might take awhile.";
                 Stopwatch watch = new Stopwatch();
                 var waveBuffer = new NAudio.Wave.WaveBuffer(File.ReadAllBytes(AudioFilePath));
                 using (var waveInfo = new NAudio.Wave.WaveFileReader(AudioFilePath))
