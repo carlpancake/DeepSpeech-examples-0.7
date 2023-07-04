@@ -4,87 +4,84 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Deepspeech client"
-    Width="496"
-    Height="565"
+    Title="Bisaya Speech-To-Text Transcriber 1.0"
+    Icon="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\logo_BWU_icon.ico"
+    Width="568"
+    Height="522"
     Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Height="549" VerticalAlignment="Top">
+    <Grid Margin="0,0,0,6">
         <Grid.RowDefinitions>
-            <RowDefinition Height="222" />
+            <RowDefinition Height="271" />
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox
             Grid.Row="1"
-            Margin="10,36,10,12"
+            Margin="10,25,10,6"
             FontSize="16px"
             Text="{Binding Transcription, Mode=OneWay}"
             TextWrapping="Wrap" />
         <Label
-            Grid.Row="1"
             Height="26"
-            Margin="10,5,10,0"
+            Margin="10,2,10,0"
             VerticalAlignment="Top"
-            Content="Results:" />
+            Content="Results:" Grid.Row="1" />
         <Label
-            Height="26"
-            Margin="10,10,10,0"
-            VerticalAlignment="Top"
-            Content="Select an audio file to transcript:" />
+            Margin="10,109,10,0"
+            Content="Select an audio file to transcript:" Height="26" VerticalAlignment="Top" />
         <TextBox
-            Height="23"
-            Margin="10,41,10,0"
-            VerticalAlignment="Top"
+            Margin="111,0,10,106"
             Text="{Binding AudioFilePath, Mode=TwoWay}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap" Height="25" VerticalAlignment="Bottom" 
+            IsReadOnly="True"/>
         <Button
             Width="96"
             Height="25"
-            Margin="10,69,0,0"
+            Margin="10,0,0,106"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            VerticalAlignment="Bottom"
             Command="{Binding SelectFileCommand}"
             Content="Open file" />
         <Button
             Width="199"
-            Height="25"
-            Margin="111,69,0,0"
+            Margin="10,0,0,76"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
             Command="{Binding InferenceFromFileCommand}"
-            Content="Transcribe" Click="Button_Click" />
+            Content="Transcribe" Click="Button_Click" Height="25" VerticalAlignment="Bottom" />
         <Label
-            Height="26"
-            Margin="10,0,10,0"
-            VerticalAlignment="Center"
+            Height="25"
+            Margin="214,170,10,0"
+            VerticalAlignment="Top"
             Content="{Binding StatusMessage, Mode=OneWay}" />
         <Label
-            Height="26"
-            Margin="10,130,10,0"
-            VerticalAlignment="Top"
-            Content="Or select an audio input:" />
+            Margin="10,209,10,0"
+            Content="Or select an audio input:" Height="26" VerticalAlignment="Top" />
         <ComboBox
-            Height="23"
-            Margin="10,161,10,0"
-            VerticalAlignment="Top"
+            Margin="10,0,0,10"
             DisplayMemberPath="FriendlyName"
             ItemsSource="{Binding AvailableRecordDevices, Mode=TwoWay}"
             SelectedIndex="0"
-            SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" />
+            SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" HorizontalAlignment="Left" Width="257" Height="23" VerticalAlignment="Bottom" />
         <Button
             Height="23"
-            Margin="10,0,0,10"
+            Margin="272,0,0,10"
             VerticalAlignment="Bottom"
             Command="{Binding StartRecordingCommand}"
-            Content="Record"
-            IsEnabled="{Binding EnableStartRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="150" />
+            Content="Start recording"
+            IsEnabled="{Binding EnableStartRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="126" Click="Button_Click_1" />
         <Button
             Height="23"
-            Margin="164,0,0,10"
+            Margin="403,0,0,10"
             VerticalAlignment="Bottom"
             Command="{Binding StopRecordingCommand}"
-            Content="Stop"
-            IsEnabled="{Binding EnableStopRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="146" />
+            Content="Stop recording"
+            IsEnabled="{Binding EnableStopRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="128" />
+        <Image HorizontalAlignment="Center" Height="94" Margin="0,10,0,0" VerticalAlignment="Top" Width="244">
+            <Image.Source>
+                <BitmapImage UriSource="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\TITLE.png" />
+            </Image.Source>
+        </Image>
     </Grid>
 </Window>

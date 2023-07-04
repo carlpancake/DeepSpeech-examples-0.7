@@ -313,10 +313,18 @@ namespace DeepSpeech.WPF.ViewModels
             {
                 if (_bufferQueue.TryDequeue(out short[] buffer))
                 {
-                    StreamingIsBusy = true;
-                    _sttClient.FeedAudioContent(_sttStream, buffer, Convert.ToUInt32(buffer.Length));
-                    StreamingIsBusy = false;
+                        StreamingIsBusy = true;
+                        try
+                        {
+                            _sttClient.FeedAudioContent(_sttStream, buffer, Convert.ToUInt32(buffer.Length));
+                        }
+                        catch
+                        {
+                            Transcription = "Error while transcribing recording.";
+                        }
+                        StreamingIsBusy = false;
                 }
+                    
             }
         }
        
