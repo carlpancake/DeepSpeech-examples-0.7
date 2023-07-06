@@ -5,6 +5,7 @@ using CSCore.SoundIn;
 using CSCore.Streams;
 using DeepSpeechClient.Interfaces;
 using DeepSpeechClient.Models;
+using DeepSpeechWPF;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
 using System;
@@ -145,6 +146,13 @@ namespace DeepSpeech.WPF.ViewModels
             set => SetProperty(ref _statusMessage, value);
         }
 
+        private string _diagnostics;
+        public string Diagnostics 
+        { 
+            get => _diagnostics; 
+            set => SetProperty(ref _diagnostics, value); 
+        }
+
         private bool _externalScorerEnabled;
         /// <summary>
         /// Gets or sets the external scorer status.
@@ -176,6 +184,7 @@ namespace DeepSpeech.WPF.ViewModels
             get => _transcription;
             set => SetProperty(ref _transcription, value);
         }
+
 
         private string _audioFilePaht;
         /// <summary>
@@ -368,16 +377,15 @@ namespace DeepSpeech.WPF.ViewModels
                         Convert.ToUInt32(waveBuffer.MaxSize / 2)));
 
                     watch.Stop();
-                    Transcription = $"Audio duration: {waveInfo.TotalTime.ToString()} {Environment.NewLine}" +
-                        $"Inference took: {watch.Elapsed.ToString()} {Environment.NewLine}" +
-                        $"Recognized text: {speechResult}";
+                    Transcription = $"{speechResult}";
+                    Diagnostics = $"Audio duration: {waveInfo.TotalTime.ToString()}" + $"  Inference took: {watch.Elapsed.ToString()}";
                 }
                 waveBuffer.Clear();
                 StatusMessage = string.Empty;
             }
             catch (Exception ex)
             {
-                StatusMessage = ex.Message;
+                StatusMessage = "You must select a file before transcribing.";
             }
             finally
             {
@@ -391,6 +399,7 @@ namespace DeepSpeech.WPF.ViewModels
         /// <returns>A Task to await.</returns>
         private async Task StopRecordingAsync()
         {
+            Diagnostics = "Analyzing voice recording...";
             EnableStopRecord = false;
             _audioCapture.Stop();
             while (!_bufferQueue.IsEmpty && StreamingIsBusy) //we wait for all the queued buffers to be processed
@@ -398,6 +407,7 @@ namespace DeepSpeech.WPF.ViewModels
                 await Task.Delay(90);
             }
             Transcription = _sttClient.FinishStream(_sttStream);
+            Diagnostics = string.Empty;
             EnableStartRecord = true;
         }
 
@@ -406,6 +416,7 @@ namespace DeepSpeech.WPF.ViewModels
         /// </summary>
         private void StartRecording()
         {
+            Diagnostics = "Recording...";
             _sttStream =_sttClient.CreateStream();
             _audioCapture.Start();
             EnableStartRecord = false;

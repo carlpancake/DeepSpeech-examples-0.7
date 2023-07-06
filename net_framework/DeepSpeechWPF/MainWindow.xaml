@@ -7,56 +7,86 @@
     Title="Bisaya Speech-To-Text Transcriber 1.0"
     Icon="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\logo_BWU_icon.ico"
     Width="568"
-    Height="522"
+    Height="558"
     Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid Margin="0,0,0,6">
         <Grid.RowDefinitions>
-            <RowDefinition Height="271" />
+            <RowDefinition Height="292" />
             <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="23.04"/>
         </Grid.RowDefinitions>
-        <TextBox
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="Open WAV File" 
+                              Command="{Binding SelectFileCommand}"/>
+                    <MenuItem Header="Transcribe" 
+                              Command="{Binding InferenceFromFileCommand}"/>
+                    <Separator/>
+                    <MenuItem x:Name="EXIT" 
+                              Header="Exit" 
+                              Click="EXIT_Click"/>
+                </MenuItem>
+                <MenuItem Header="Record">
+                    <MenuItem Header="Start Recording" 
+                              Command="{Binding StartRecordingCommand}"
+                              IsEnabled="{Binding EnableStartRecord, Mode=OneWay}"/>
+                    <MenuItem Header="Stop Recording" 
+                              Command="{Binding StopRecordingCommand}"
+                              IsEnabled="{Binding EnableStopRecord, Mode=OneWay}"/>
+                </MenuItem>
+                <MenuItem Header="Format">
+                    <MenuItem x:Name="INCREASE_FONT" 
+                              Header="Increase Font Size"
+                              Click="INCREASE_FONT_Click"/>
+                    <MenuItem x:Name="DECREASE_FONT" 
+                              Header="Decrease Font Size"
+                              Click="DECREASE_FONT_Click"/>
+                </MenuItem>
+                <MenuItem Header="About">
+                    <MenuItem Header="About the Program"/>
+                    <MenuItem Header="About the Author"/>
+                    <MenuItem Header="About the Model"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <TextBox x:Name="txtResult"
             Grid.Row="1"
             Margin="10,25,10,6"
             FontSize="16px"
             Text="{Binding Transcription, Mode=OneWay}"
-            TextWrapping="Wrap" />
+            TextWrapping="Wrap"/>
         <Label
             Height="26"
             Margin="10,2,10,0"
             VerticalAlignment="Top"
             Content="Results:" Grid.Row="1" />
         <Label
-            Margin="10,109,10,0"
+            Margin="10,130,10,0"
             Content="Select an audio file to transcript:" Height="26" VerticalAlignment="Top" />
-        <TextBox
-            Margin="111,0,10,106"
+        <TextBox x:Name="txtBrowse"
+            Margin="130,0,10,106"
             Text="{Binding AudioFilePath, Mode=TwoWay}"
             TextWrapping="Wrap" Height="25" VerticalAlignment="Bottom" 
             IsReadOnly="True"/>
         <Button
-            Width="96"
+            Width="115"
             Height="25"
             Margin="10,0,0,106"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Command="{Binding SelectFileCommand}"
-            Content="Open file" />
+            Content="Open WAV file" />
         <Button
             Width="199"
             Margin="10,0,0,76"
             HorizontalAlignment="Left"
             Command="{Binding InferenceFromFileCommand}"
-            Content="Transcribe" Click="Button_Click" Height="25" VerticalAlignment="Bottom" />
+            Content="Transcribe" Height="25" VerticalAlignment="Bottom" />
         <Label
-            Height="25"
-            Margin="214,170,10,0"
-            VerticalAlignment="Top"
-            Content="{Binding StatusMessage, Mode=OneWay}" />
-        <Label
-            Margin="10,209,10,0"
+            Margin="10,228,10,0"
             Content="Or select an audio input:" Height="26" VerticalAlignment="Top" />
         <ComboBox
             Margin="10,0,0,10"
@@ -70,18 +100,22 @@
             VerticalAlignment="Bottom"
             Command="{Binding StartRecordingCommand}"
             Content="Start recording"
-            IsEnabled="{Binding EnableStartRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="126" Click="Button_Click_1" />
+            IsEnabled="{Binding EnableStartRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="139"/>
         <Button
             Height="23"
-            Margin="403,0,0,10"
+            Margin="416,0,10,10"
             VerticalAlignment="Bottom"
             Command="{Binding StopRecordingCommand}"
             Content="Stop recording"
-            IsEnabled="{Binding EnableStopRecord, Mode=OneWay}" HorizontalAlignment="Left" Width="128" />
-        <Image HorizontalAlignment="Center" Height="94" Margin="0,10,0,0" VerticalAlignment="Top" Width="244">
+            IsEnabled="{Binding EnableStopRecord, Mode=OneWay}" />
+        <Image HorizontalAlignment="Center" Height="94" Margin="0,31,0,0" VerticalAlignment="Top" Width="244">
             <Image.Source>
                 <BitmapImage UriSource="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\TITLE.png" />
             </Image.Source>
         </Image>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem Content="{Binding StatusMessage}" FontSize="12px"/>
+            <StatusBarItem Content="{Binding Diagnostics}" FontSize="12px"/>
+        </StatusBar>
     </Grid>
 </Window>
