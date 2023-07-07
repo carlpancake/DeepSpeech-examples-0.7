@@ -385,7 +385,7 @@ namespace DeepSpeech.WPF.ViewModels
             }
             catch (Exception ex)
             {
-                StatusMessage = "You must select a file before transcribing.";
+                StatusMessage = ex.Message;
             }
             finally
             {
@@ -399,7 +399,7 @@ namespace DeepSpeech.WPF.ViewModels
         /// <returns>A Task to await.</returns>
         private async Task StopRecordingAsync()
         {
-            Diagnostics = "Analyzing voice recording...";
+            StatusMessage = "Analyzing voice recording...";
             EnableStopRecord = false;
             _audioCapture.Stop();
             while (!_bufferQueue.IsEmpty && StreamingIsBusy) //we wait for all the queued buffers to be processed
@@ -407,7 +407,7 @@ namespace DeepSpeech.WPF.ViewModels
                 await Task.Delay(90);
             }
             Transcription = _sttClient.FinishStream(_sttStream);
-            Diagnostics = string.Empty;
+            StatusMessage = string.Empty;
             EnableStartRecord = true;
         }
 
@@ -416,7 +416,8 @@ namespace DeepSpeech.WPF.ViewModels
         /// </summary>
         private void StartRecording()
         {
-            Diagnostics = "Recording...";
+            Diagnostics = string.Empty;
+            StatusMessage = "Recording...";
             _sttStream =_sttClient.CreateStream();
             _audioCapture.Start();
             EnableStartRecord = false;
@@ -438,6 +439,8 @@ namespace DeepSpeech.WPF.ViewModels
             if ((bool)dialog.ShowDialog())
             {
                 AudioFilePath = dialog.FileName;
+                StatusMessage = string.Empty;
+                Diagnostics = string.Empty;
             }
         }
     }

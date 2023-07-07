@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using DeepSpeech.WPF;
 using DeepSpeech.WPF.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,18 @@ namespace DeepSpeechWPF
         private void DECREASE_FONT_Click(object sender, RoutedEventArgs e)
         {
             txtResult.FontSize = txtResult.FontSize - 4;
-        }        
+        }
+
+        private void ABOUT_PROGRAM_Click(object sender, RoutedEventArgs e)
+        {
+            AboutTheProgram Window = new AboutTheProgram();
+            Window.Show();
+        }
+
+        private void ABOUT_MODEL_Click(object sender, RoutedEventArgs e)
+        {
+            AboutTheModel Window = new AboutTheModel();
+            Window.Show();
+        }
     }
 }
