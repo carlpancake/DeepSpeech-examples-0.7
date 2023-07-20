@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeepSpeech.WPF"
-        Icon="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\logo_BWU_icon.ico"
+        Icon="Assets/logo_BWU_icon.ico"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"

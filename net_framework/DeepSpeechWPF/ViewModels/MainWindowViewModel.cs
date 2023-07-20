@@ -25,17 +25,11 @@ namespace DeepSpeech.WPF.ViewModels
     {
         #region Constants
         private const int SampleRate = 16000;
-        private const string ScorerPath = "kenlm.scorer";
         #endregion
 
         private readonly IDeepSpeech _sttClient;
 
         #region Commands
-        /// <summary>
-        /// Gets or sets the command that enables the external scorer.
-        /// </summary>
-        public IAsyncCommand EnableExternalScorerCommand { get; private set; }
-
         /// <summary>
         /// Gets or sets the command that runs inference using an audio file.
         /// </summary>
@@ -153,17 +147,6 @@ namespace DeepSpeech.WPF.ViewModels
             set => SetProperty(ref _diagnostics, value); 
         }
 
-        private bool _externalScorerEnabled;
-        /// <summary>
-        /// Gets or sets the external scorer status.
-        /// </summary>
-        private bool ExternalScorerEnabled
-        {
-            get => _externalScorerEnabled;
-            set => SetProperty(ref _externalScorerEnabled, value,
-                    onChanged: () => ((AsyncCommand)EnableExternalScorerCommand).RaiseCanExecuteChanged());
-        }
-
         private bool _isRunningInference;
         /// <summary>
         /// Gets or sets whenever the model is running inference.
@@ -212,9 +195,6 @@ namespace DeepSpeech.WPF.ViewModels
         public MainWindowViewModel(IDeepSpeech sttClient)
         {
             _sttClient = sttClient;
-
-            EnableExternalScorerCommand = new AsyncCommand(()=>EnableExternalScorerAsync(ScorerPath),
-                _ => !ExternalScorerEnabled);
 
             InferenceFromFileCommand = new AsyncCommand(ExecuteInferenceFromFileAsync,
                 _ => !IsRunningInference);
@@ -337,25 +317,6 @@ namespace DeepSpeech.WPF.ViewModels
             }
         }
        
-        /// <summary>
-        /// Enables the external scorer.
-        /// </summary>
-        /// <param name="scorerPath">External scorer path.</param>
-        /// <returns>A Task to await.</returns>
-        public async Task EnableExternalScorerAsync(string scorerPath)
-        {
-            try
-            {
-                StatusMessage = "Loading external scorer...";
-                await Task.Run(() => _sttClient.EnableExternalScorer(ScorerPath));
-                ExternalScorerEnabled = true;
-                StatusMessage = "External scorer loaded.";
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = ex.Message;
-            }
-        }
         /// <summary>
         /// Runs inference and sets the transcription of an audio file.
         /// </summary>

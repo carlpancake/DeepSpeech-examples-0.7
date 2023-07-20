@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Bisaya Speech-To-Text Transcriber"
-    Icon="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\logo_BWU_icon.ico"
+    Icon="Assets/logo_BWU_icon.ico"
     Width="568"
     Height="558"
     Loaded="Window_Loaded"
@@ -109,7 +109,7 @@
             IsEnabled="{Binding EnableStopRecord, Mode=OneWay}" />
         <Image HorizontalAlignment="Center" Height="94" Margin="0,31,0,0" VerticalAlignment="Top" Width="244">
             <Image.Source>
-                <BitmapImage UriSource="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\TITLE.png" />
+                <BitmapImage UriSource="Assets/TITLE.png" />
             </Image.Source>
         </Image>
         <StatusBar Background="white" Grid.Row="2" Margin="10,0,10,0">

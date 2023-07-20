@@ -21,31 +21,12 @@ namespace DeepSpeech.WPF
     /// </summary>
     public partial class AboutTheModel : Window
     {
-        class Metadata
-        {
-            string start;
-            string author;
-            string model_name;
-            string model_version;
-            string contact_info;
-            string license;
-            string language;
-            string runtime;
-            string min_ds_version;
-            string max_ds_version;
-            string acoustic_model_url;
-            string scorer_url;
-            string end;
-            string footnotes;
-        }
-
         List<string> data = new List<string>();
         string line;
-        string fields;
         public AboutTheModel()
         {
             InitializeComponent();
-            TextReader reader = new StreamReader("C:\\Users\\carlw\\Documents\\GitHub\\DeepSpeech-examples-0.7\\net_framework\\DeepSpeechWPF\\Model\\Numerov3.md");
+            TextReader reader = new StreamReader("Model/Numerov4.md");
             while ((line = reader.ReadLine()) != null)
             {
                 data.Add(line);

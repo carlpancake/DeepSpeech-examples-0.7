@@ -20,7 +20,7 @@ namespace DeepSpeechWPF
             {
                 //Register instance of DeepSpeech
                 DeepSpeechClient.DeepSpeech deepSpeechClient =
-                    new DeepSpeechClient.DeepSpeech("C:\\Users\\carlw\\Documents\\GitHub\\DeepSpeech-examples-0.7\\net_framework\\DeepSpeechWPF\\Model\\Numerov4_output_graph.pbmm");
+                    new DeepSpeechClient.DeepSpeech("Model/Numerov4_output_graph.pbmm");
 
                 SimpleIoc.Default.Register<IDeepSpeech>(() => deepSpeechClient);
                 SimpleIoc.Default.Register<MainWindowViewModel>();

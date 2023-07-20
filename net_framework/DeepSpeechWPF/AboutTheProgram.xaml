@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeepSpeech.WPF"
-        Icon="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\logo_BWU_icon.ico"
+        Icon="Assets/logo_BWU_icon.ico"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         ResizeMode="NoResize"
@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Image Margin="10,10,320,10" Grid.RowSpan="2">
             <Image.Source>
-                <BitmapImage UriSource="C:\Users\carlw\Documents\GitHub\DeepSpeech-examples-0.7\net_framework\DeepSpeechWPF\Assets\LOGO.png"/>
+                <BitmapImage UriSource="Assets/LOGO.png"/>
             </Image.Source>
         </Image>
         <Label Content="Bisaya Speech-to-Text Transcriber" Margin="210,10,10,0" FontSize="18"/>
